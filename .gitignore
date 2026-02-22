@@ -1,2 +1,5 @@
 # Virtual environment
 venv-allow-deny-challenge/
+
+# Cache
+__pycache__
