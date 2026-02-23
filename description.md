@@ -35,4 +35,6 @@ Quando uma URL enviada não estiver dentro das schemes esperadas, retornar erro 
 Deve gerar uma estatistica simples de quantos itens há em cada arquivo. Ex: `bouncer.py --stats`, assim retornando quantos itens há em cada lista.
   * **BONUS**: sumarizar por domínio
 
+Deve existir uma opção para retornar os valores dentro de denylist e allowlist.  
+
 Devem existir testes conforme a metodologia TDD.
