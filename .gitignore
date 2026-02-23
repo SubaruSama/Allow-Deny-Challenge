@@ -1,2 +1,8 @@
 # Virtual environment
 venv-allow-deny-challenge/
+
+# Cache
+__pycache__
+
+# IDE/CodeEditor stuff
+.zed/
