@@ -38,9 +38,3 @@ Deve gerar uma estatistica simples de quantos itens há em cada arquivo. Ex: `bo
 Deve existir uma opção para retornar os valores dentro de denylist e allowlist.  
 
 Devem existir testes conforme a metodologia TDD.
-
----
-
-# Refactoring
-
-Acredito que a utilização de OOP neste momento não é o melhor caminho. As classes AllowList e DenyList não possuem membros, apenas métodos.
