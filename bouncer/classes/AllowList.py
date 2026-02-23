@@ -74,7 +74,7 @@ class AllowList:
         """
         Method that will count how much URLs exists in allowlist.txt
         """
-        return 0
+        return len(self.get_content())
 
     def get_content(self) -> list[str]:
         with open(f"{CURRENT_DIR}{ALLOWLIST_FILE}", "r") as f:

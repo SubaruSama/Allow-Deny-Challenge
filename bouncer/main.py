@@ -55,7 +55,11 @@ def main():
         allowList.add_url(args.add_allowlist)
 
     if args.get_allowlist:
-        pass
+        allowList = AllowList()
+
+        print("URLs: ")
+        for url in allowList.get_content():
+            print(url)
 
 
 if __name__ == "__main__":
