@@ -1,0 +1,46 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "label": "Bouncer: Add Allowlist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-allowlist", "http://example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Add Invalid Scheme in Allowlist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-allowlist", "smtp://example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Add Valid Scheme in Denylist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-denylist", "http://example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Add Without Scheme in Denylist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-denylist", "example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+]
