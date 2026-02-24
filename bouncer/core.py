@@ -22,13 +22,9 @@ import os
 from pathlib import Path
 from urllib.parse import urlparse
 
-from classes.exceptions import InvalidSchemeInURL, MissingSchemeInURL
-from constants import (
-    allowed_schemes,
-    allowlist_file,
-    denylist_file,
-)
-from utils.dir import get_current_dir
+from .classes.exceptions import InvalidSchemeInURL, MissingSchemeInURL
+from .constants import files, get_allowed_schemes
+from .utils.dir import get_current_dir
 
 CURRENT_DIR = get_current_dir()
 
@@ -76,7 +72,7 @@ def _is_scheme_present(url: str) -> bool:
 
 def _is_valid_scheme(url: str) -> bool:
     parsed = urlparse(url)
-    return False if parsed.scheme not in allowed_schemes else True
+    return False if parsed.scheme not in get_allowed_schemes() else True
 
 
 def _add_default_scheme(url: str) -> str:
