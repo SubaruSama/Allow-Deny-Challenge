@@ -1,2 +1,2 @@
-class DenyList:
-    pass
+# class DenyList:
+#     pass
