@@ -1,3 +1,5 @@
 import os
 
-current_dir: str = os.getcwd()
+
+def get_current_dir() -> str:
+    return os.getcwd()

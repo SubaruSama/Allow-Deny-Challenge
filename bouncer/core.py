@@ -28,9 +28,9 @@ from constants import (
     allowlist_file,
     denylist_file,
 )
-from utils.dir import current_dir
+from utils.dir import get_current_dir
 
-CURRENT_DIR = current_dir
+CURRENT_DIR = get_current_dir()
 
 
 def add_to_denylist(url: str) -> None:
