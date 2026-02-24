@@ -9,7 +9,7 @@
 
 import unittest
 
-from bouncer.classes.AllowList import AllowList
+from bouncer import core
 
 # 1. Test the instantiation of the AllowList class
 # 2. Check if the file list is created at the right directory, lists/allowlist.txt
@@ -20,32 +20,39 @@ from bouncer.classes.AllowList import AllowList
 
 # Test suite
 class TestAllowList(unittest.TestCase):
-    # Test fixture
-    def setUp(self):
-        self.allowlist = AllowList()
-
-    def tearDown(self):
-        del self.allowlist
-
     # Test cases
     @unittest.skip("Need to check how to work with mocks and temp files")
-    def test_add_url(self):
+    def test_add_url_to_allowlist(self):
         self.assertTrue(
-            self.allowlist.add_url("https://example.com"),
+            core.add_to_allowlist("https://example.com"),
             "It should return True, meaning it had no probelms adding such URL",
         )
 
-    def test_statistics(self):
-        self.assertGreater(
-            self.allowlist.statistics(),
-            0,
-            "If the file allowlist.txt is not empty, it should return > 0",
+    @unittest.skip("Need to check how to work with mocks and temp files")
+    def test_add_url_to_denylist(self):
+        self.assertTrue(
+            core.add_to_denylist("https://example.com"),
+            "It should return True, meaning it had no problemas adding such URL",
         )
 
+    @unittest.skip("Need to check how to work with mocks and temp files")
+    def test_insert_invalid_scheme(self):
+        self.assertFalse(
+            core.add_to_allowlist("smtp://example.com")
+            and core.add_to_denylist("smtp://example.com")
+        )
+
+    def test_statistics(self):
+        stats = core.statistics()
+
+        self.assertIsInstance(stats, dict)
+        for key, value in stats.items():
+            self.assertIsInstance(key, str, f"{key} must be a string")
+            self.assertIsInstance(value, int, f"{value} must be a int")
+
     def test_get_content(self):
-        self.assertNotEqual(
-            self.allowlist.get_content(),
-            "",
+        self.assertTrue(
+            core.get_allowlist() and core.get_denylist(),
             "If the file allowlists does not have any line text, it means its empty",
         )
 
