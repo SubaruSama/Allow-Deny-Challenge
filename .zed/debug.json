@@ -12,6 +12,19 @@
     "env": {
       "PYTHONPATH": ".",
     },
+    "debugger": {
+      "button": true,
+    },
+  },
+  {
+    "label": "Bouncer: Add Allowlist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-allowlist", "http://example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
   },
   {
     "label": "Bouncer: Add Invalid Scheme in Allowlist",
@@ -19,6 +32,36 @@
     "request": "launch",
     "module": "bouncer.main",
     "args": ["--add-allowlist", "smtp://example.org"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Add Invalid Domain in Allowlist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-allowlist", "example"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Add valid Domain in Allowlist that returns an error",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--add-allowlist", "test.com"],
+    "env": {
+      "PYTHONPATH": ".",
+    },
+  },
+  {
+    "label": "Bouncer: Get Allowlist",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "module": "bouncer.main",
+    "args": ["--get-allowlist"],
     "env": {
       "PYTHONPATH": ".",
     },
