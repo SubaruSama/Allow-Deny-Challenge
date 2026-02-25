@@ -6,3 +6,6 @@ __pycache__
 
 # IDE/CodeEditor stuff
 .zed/
+
+# Project data
+bouncer/data/*
