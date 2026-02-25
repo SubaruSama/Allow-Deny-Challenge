@@ -9,11 +9,10 @@
 
 from contextlib import contextmanager
 from pathlib import Path
+from typing import Generator
 
-from typing_extensions import Generator
-from utils.dir import current_dir
-
-from bouncer.constants import allowlist_file, denylist_file
+from bouncer.constants import files
+from bouncer.utils.dir import get_current_dir
 
 """
 Util file that deals with file operations, such as:
@@ -36,7 +35,7 @@ def open_file(file_path: Path) -> Generator:
     if not _is_files_present():
         _create_files()
 
-    f = open(file_path, "r", encoding="utf-8")
+    f = open(file_path, "a+", encoding="utf-8")
 
     try:
         yield f
@@ -46,6 +45,7 @@ def open_file(file_path: Path) -> Generator:
 
 def read_file(file_path: Path) -> list[str]:
     with open_file(file_path) as f:
+        f.seek(0)
         return f.readlines()
 
 
@@ -53,14 +53,14 @@ def _create_files() -> None:
     """
     Create both allow and deny lists
     """
-    open(f"{current_dir}{allowlist_file}", "a", encoding="utf-8").close()
-    open(f"{current_dir}{denylist_file}", "a", encoding="utf-8").close()
+    open(f"{get_current_dir()}{files['allowlist']}", "a", encoding="utf-8").close()
+    open(f"{get_current_dir()}{files['denylist']}", "a", encoding="utf-8").close()
 
 
 def write_file(file_path: Path, content: str) -> None:
     with open_file(file_path) as f:
         if f.writable():
-            f.write(content)
+            f.write(f"{content}\n")
 
 
 def _is_files_present() -> bool:
@@ -71,8 +71,8 @@ def _is_files_present() -> bool:
     return (
         True
         if (
-            Path(f"{current_dir}{allowlist_file}").is_file()
-            and Path(f"{current_dir}{denylist_file}").is_file()
+            Path(f"{get_current_dir()}{files['allowlist']}").is_file()
+            and Path(f"{get_current_dir()}{files['denylist']}").is_file()
         )
         else False
     )

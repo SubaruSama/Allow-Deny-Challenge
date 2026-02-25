@@ -42,18 +42,61 @@ class TestAllowList(unittest.TestCase):
             and core.add_to_denylist("smtp://example.com")
         )
 
+    @unittest.skip("Need to check how to work with mocks and temp files")
+    def test_insert_missing_scheme(self):
+        self.assertTrue(
+            core.add_to_allowlist("example.org") and core.add_to_denylist("example.org")
+        )
+
     def test_statistics(self):
         stats = core.statistics()
+        stats_values = len(stats.values())
 
         self.assertIsInstance(stats, dict)
         for key, value in stats.items():
             self.assertIsInstance(key, str, f"{key} must be a string")
             self.assertIsInstance(value, int, f"{value} must be a int")
 
+        self.assertGreater(
+            int(stats_values),
+            0,
+            msg="Statistics must be greater than zero if list is not empty",
+        )
+
+    def test_statistics_summarized(self):
+        stats = core.statistics_summarized()
+        stats_values = len(stats.values())
+
+        self.assertIsInstance(stats, dict)
+        for key, value in stats.items():
+            self.assertIsInstance(key, str, f"{key} must be a string")
+            self.assertIsInstance(value, int, f"{value} must be a int")
+
+        self.assertGreater(
+            int(stats_values),
+            0,
+            msg="Statistics Summarized must be greater than zero if list is not empty",
+        )
+
+    def test_statistics_scheme(self):
+        stats = core.statistics_scheme()
+        stats_values = len(stats.values())
+
+        self.assertIsInstance(stats, dict)
+        for key, value in stats.items():
+            self.assertIsInstance(key, str, f"{key} must be a string")
+            self.assertIsInstance(value, int, f"{value} must be a int")
+
+        self.assertGreater(
+            int(stats_values),
+            0,
+            msg="Statistics Scheme must be greater than zero if list is not empty",
+        )
+
     def test_get_content(self):
         self.assertTrue(
             core.get_allowlist() and core.get_denylist(),
-            "If the file allowlists does not have any line text, it means its empty",
+            "If the files allowlists does not have any line text, it means its empty",
         )
 
 
